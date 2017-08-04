@@ -1,10 +1,10 @@
-#SimpleDao - A Data Access Object framework
+# SimpleDao - A Data Access Object framework
 
 [TOC]
 
 SimpleDao 是一个轻量级的数据库操作工具类,可以快速方便地对数据库进行各种操作.
 
-##Maven
+## Maven
 
 Add the following dependency to your POM:
 
@@ -32,19 +32,19 @@ Add the following dependency to your POM:
 </dependency>
 ```
 
-##System Requirements
+## System Requirements
 
 * JDK 1.7+
 
-##Features
+## Features
 
 * 易上手 - API简单易用,你可以在几分钟之内上手使用
 * 轻量级 - 整体代码结构简单,你可以在很短的时间内理解并进行扩展
 * 快速 - 仅对原生JDBC进行一层薄封装
 
-##快速开始
+## 快速开始
 
-###创建测试数据库
+## #创建测试数据库
 
 ```sql
 CREATE TABLE client (
@@ -53,7 +53,7 @@ CREATE TABLE client (
 );
 ```
 
-###创建实体类
+## #创建实体类
 
 ```java
 @Table(name = "client")
@@ -75,7 +75,7 @@ public class TestEntity {
 }
 ```
 
-###实体类CRUD
+## #实体类CRUD
 
 ```java
 // 创建Dao是重量级操作,请生成后全局共享
@@ -102,7 +102,7 @@ dao.update(entity);
 dao.delete(entity);
 ```
 
-###创建普通类
+## #创建普通类
 
 ```java
 public class TestBean {
@@ -115,7 +115,7 @@ public class TestBean {
 }
 ```
 
-###普通类CRUD
+## #普通类CRUD
 
 ```java
 // 创建Dao是重量级操作,请生成后全局共享
@@ -145,7 +145,7 @@ dao.delete(SqlBuilders.delete("client")
                .create());
 ```
 
-###自定义SQL
+## #自定义SQL
 
 ```java
 // 创建Dao是重量级操作,请生成后全局共享
@@ -163,7 +163,7 @@ dao.execute(SqlBuilders.sql("delete from client where name = :name")
                .create());
 ```
 
-##SqlBuilder
+## SqlBuilder
 
 SimpleDao基于[SqlBuilder](https://github.com/team4u/SqlBuilder)构建,使用了其中的实体类注解与SqlBuilders API.
 
@@ -198,7 +198,7 @@ dao.queryForObject(TestEntity.class,
 
 关于SqlBuilder的使用,请参考[SqlBuilder](https://github.com/team4u/SqlBuilder)项目中的详细文档,此处不在重复.
 
-##Dao接口
+## Dao接口
 
 Dao接口中包含了所有功能,具体用法请参考方法中的注释.
 
@@ -210,7 +210,7 @@ public interface Dao {
      *
      * @return 对象
      */
-    <T> T queryWithPKForObject(Class<T> resultClass, Object... ids);
+    <T> T queryWithPkForObject(Class<T> resultClass, Object... ids);
 
     /**
      * 查询单个对象
@@ -373,13 +373,13 @@ public interface Dao {
 }
 ```
 
-##关于主键
+## 关于主键
 
 @Id中的auto属性默认为FALSE,如果数据库中设置了自增长主键（如MySQL）,需要将auto设置为TRUE.
 
 调用dao.insert()方法后,SimpleDao将自动把该记录的主键值赋值到实体类的@Id所在字段.
 
-##结果转换
+## 结果转换
 
 Dao中的所有查询接口中,都可以方便地转成为指定类型（resultClass）,默认支持的类型有:
 
@@ -456,7 +456,7 @@ Dao中的所有查询接口中,都可以方便地转成为指定类型（resultC
   dao.query(resultSetHandler, SqlBuilders.select("my_table").create());
   ```
 
-##事务
+## 事务
 
 SimpleDao实现了简单但较为常用的事务处理:
 
@@ -471,7 +471,7 @@ Transactions.execute(Runnable... runnableList)
 
 以上代码中,runnableList只要出现一个异常,则所有runnableList都将回滚;若存在多数据源,则所有数据源都将回滚.
 
-###嵌套事务
+### 嵌套事务
 
 ```java
 public void doA() {
@@ -502,7 +502,7 @@ public void doC() {
 
 以上代码中三个函数都声明了事务,但在doA方法中,只有最外层的事务起作用，即以doA事务为准.
 
-###事务托管
+### 事务托管
 
 如果SimpleDao提供的事务管理不能满足需求,想用其他框架进行事务管理（如Spring）,可以实现ConnectionHandler进行完整的事务控制.
 

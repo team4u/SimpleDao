@@ -18,7 +18,7 @@ public interface Dao {
      *
      * @return 对象
      */
-    <T> T queryWithPKForObject(Class<T> resultClass, Object... ids);
+    <T> T queryWithPkForObject(Class<T> resultClass, Object... ids);
 
     /**
      * 查询单个对象

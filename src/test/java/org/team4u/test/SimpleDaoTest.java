@@ -59,7 +59,7 @@ public class SimpleDaoTest {
         String name = dao.queryForObject(String.class, sql);
         Assert.assertEquals(entity.getName(), name);
 
-        Assert.assertEquals(entity, dao.queryWithPKForObject(TestEntity.class, entity.getId()));
+        Assert.assertEquals(entity, dao.queryWithPkForObject(TestEntity.class, entity.getId()));
 
         Assert.assertEquals(entity, dao.queryForObject(TestEntity.class,
                 SqlBuilders.sql("select * from client x where client_id = :id")

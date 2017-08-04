@@ -65,7 +65,7 @@ public class SimpleDao implements Dao {
     }
 
     @Override
-    public <T> T queryWithPKForObject(Class<T> resultClass, Object... ids) {
+    public <T> T queryWithPkForObject(Class<T> resultClass, Object... ids) {
         return queryForObject(resultClass, SqlBuilders.select(resultClass).withPK(ids).create());
     }
 
