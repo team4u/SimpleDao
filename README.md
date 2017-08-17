@@ -2,11 +2,19 @@
 
 [TOC]
 
-SimpleDao 是一个轻量级的数据库操作工具类,可以快速方便地对数据库进行各种操作.
+SimpleDao 是一个轻量级的数据库操作工具类，可以快速方便地对数据库进行各种操作。
+
+## System Requirements
+
+* JDK 1.7+
+
+## Features
+
+* 易上手 - API简单易用,你可以在几分钟之内上手使用
+* 轻量级 - 整体代码结构简单,你可以在很短的时间内理解并进行扩展
+* 快速 - 仅对原生JDBC进行一层薄封装
 
 ## Maven
-
-Add the following dependency to your POM:
 
 ```xml
 <dependency>
@@ -32,15 +40,20 @@ Add the following dependency to your POM:
 </dependency>
 ```
 
-## System Requirements
+添加仓库：
 
-* JDK 1.7+
-
-## Features
-
-* 易上手 - API简单易用,你可以在几分钟之内上手使用
-* 轻量级 - 整体代码结构简单,你可以在很短的时间内理解并进行扩展
-* 快速 - 仅对原生JDBC进行一层薄封装
+```xml
+<repositories>
+    <repository>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-team4u</id>
+        <name>bintray</name>
+        <url>https://dl.bintray.com/team4u/team4u</url>
+    </repository>
+</repositories>
+```
 
 ## 快速开始
 
