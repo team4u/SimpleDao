@@ -11,7 +11,7 @@ SimpleDao 是一个轻量级的数据库操作工具类，可以快速方便地�
 ## Features
 
 * 易上手 - API简单易用,你可以在几分钟之内上手使用
-* 轻量级 - 整体代码结构简单,你可以在很短的时间内理解并进行扩展
+* 轻量级 - 整体代码结构简单,你可以在很短的时间内理解并进行扩展，支持Android
 * 快速 - 仅对原生JDBC进行一层薄封装
 
 ## Maven
@@ -165,7 +165,7 @@ dao.delete(SqlBuilders.delete("client")
 Dao dao = new SimpleDao(dataSource);
 
 // 查询结果返回Map,无需定义Bean
-SimpleMap map = dao.queryForObject(SimpleMap.class,
+Dict map = dao.queryForObject(Dict.class,
                    SqlBuilders.sql("select * from client where name = :name")
                         .setParameter("name", "x")
                         .create());
@@ -447,8 +447,8 @@ Dao中的所有查询接口中,都可以方便地转成为指定类型（resultC
   dao.queryForList(Map.class, 						
                    SqlBuilders.select("my_table").create());
 
-  // 推荐使用SimpleMap，里面包含了大量便捷、常用的方法
-  dao.queryForList(SimpleMap.class, 						
+  // 推荐使用Dict，里面包含了大量便捷、常用的方法
+  dao.queryForList(Dict.class, 						
   			    SqlBuilders.select("my_table").create());
   ```
 
@@ -461,6 +461,7 @@ Dao中的所有查询接口中,都可以方便地转成为指定类型（resultC
       T handle(ResultSet rs) throws SQLException;
   }
   ```
+
   事实上SimpleDao默认的结果转换也是通过ResultSetHandler实现的，可以参考com.asiainfo.dao.resultset.handler包下的各种handler实现。
 
   最后使用自定义的resultSetHandler进行查询：
@@ -517,7 +518,7 @@ public void doC() {
 
 ### 事务托管
 
-如果SimpleDao提供的事务管理不能满足需求,想用其他框架进行事务管理（如Spring）,可以实现ConnectionHandler进行完整的事务控制.
+如果SimpleDao提供的事务管理不能满足需求，可以结合第三方框架进行事务管理（如Spring）,实现ConnectionHandler，对事务进行完整控制：
 
 ```java
 public interface ConnectionHandler {
@@ -545,5 +546,3 @@ SimpleDao提供的默认事务管理功能,与Spring的事务传播属性PROPAGA
 ```java
 Dao dao = new SimpleDao(dataSource, connectionHandler)
 ```
-
-**End**
