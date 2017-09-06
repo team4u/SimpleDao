@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.team4u.dao</groupId>
     <artifactId>simple-dao</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.team4u.sql</groupId>
             <artifactId>sql-builder</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
@@ -38,6 +38,7 @@
             <version>4.2.5.RELEASE</version>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -144,7 +145,6 @@
             <url>https://dl.bintray.com/team4u/team4u</url>
         </repository>
     </repositories>
-
 
     <distributionManagement>
         <repository>
