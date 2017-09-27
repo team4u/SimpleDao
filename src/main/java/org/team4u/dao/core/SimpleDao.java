@@ -143,11 +143,20 @@ public class SimpleDao implements Dao {
 
     @Override
     public <T> T insert(final T entity) {
+        return insert(entity, null, false);
+    }
+
+    @Override
+    public <T> T insert(final T entity, String activatedColumns, boolean ignoreNull) {
         if (entity == null) {
             return null;
         }
 
-        final Sql sql = SqlBuilders.insert(entity).create();
+        final Sql sql = SqlBuilders.insert(entity)
+                .columns(activatedColumns)
+                .setInsertIgnoreNull(ignoreNull)
+                .create();
+
         final Pair<Entity.Column, ResultSetHandler<Object>> pkHandler =
                 resultSetHandlerSelector.selectForPK(entity.getClass());
 
@@ -175,6 +184,11 @@ public class SimpleDao implements Dao {
 
     @Override
     public <T> int[] insert(List<T> entities) {
+        return insert(entities, null, false);
+    }
+
+    @Override
+    public <T> int[] insert(List<T> entities, String activatedColumns, boolean ignoreNull) {
         if (CollectionUtil.isEmpty(entities)) {
             return EmptyValue.EMPTY_INT_ARRAY;
         }
@@ -183,10 +197,10 @@ public class SimpleDao implements Dao {
                 resultSetHandlerSelector.selectForPK(entities.get(0).getClass());
 
         if (idObjectHandler == null) {
-            return fastInsert(entities);
+            return fastInsert(entities, activatedColumns, ignoreNull);
         } else {
             for (T entity : entities) {
-                insert(entity);
+                insert(entity, activatedColumns, ignoreNull);
             }
 
             int[] result = new int[entities.size()];
@@ -197,29 +211,53 @@ public class SimpleDao implements Dao {
 
     @Override
     public <T> int[] fastInsert(List<T> entities) {
+        return fastInsert(entities, null, false);
+    }
+
+    @Override
+    public <T> int[] fastInsert(List<T> entities, final String activatedColumns, final boolean ignoreNull) {
         return execute(CollectionExUtil.collect(entities, new Function<T, Sql>() {
             @Override
             public Sql invoke(T entity) {
-                return SqlBuilders.insert(entity).create();
+                return SqlBuilders.insert(entity)
+                        .columns(activatedColumns)
+                        .setInsertIgnoreNull(ignoreNull)
+                        .create();
             }
         }));
     }
 
     @Override
     public int update(Object entity) {
+        return update(entity, null, false);
+    }
+
+    @Override
+    public int update(Object entity, String activatedColumns, boolean ignoreNull) {
         if (entity == null) {
             return 0;
         }
 
-        return execute(SqlBuilders.update(entity).create());
+        return execute(SqlBuilders.update(entity)
+                .columns(activatedColumns)
+                .setUpdateIgnoreNull(ignoreNull)
+                .create());
     }
 
     @Override
     public <T> int[] update(List<T> entities) {
+        return update(entities, null, false);
+    }
+
+    @Override
+    public <T> int[] update(List<T> entities, final String activatedColumns, final boolean ignoreNull) {
         return execute(CollectionExUtil.collect(entities, new Function<T, Sql>() {
             @Override
             public Sql invoke(T entity) {
-                return SqlBuilders.update(entity).create();
+                return SqlBuilders.update(entity)
+                        .columns(activatedColumns)
+                        .setUpdateIgnoreNull(ignoreNull)
+                        .create();
             }
         }));
     }

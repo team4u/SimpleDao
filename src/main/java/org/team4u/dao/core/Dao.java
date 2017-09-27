@@ -106,6 +106,18 @@ public interface Dao {
     <T> T insert(T entity);
 
     /**
+     * 将一个对象插入到一个数据源，可忽略null值。
+     * <p>
+     * 如果你的字段声明了 '@Id(auto=true)'，则填充插入后最新的 ID 值
+     *
+     * @param entity           实体对象
+     * @param activatedColumns 可插入字段正则表达式，如a|b表示只插入a和b字段，留空则插入所有字段
+     * @param ignoreNull       null值是否不更新
+     * @return 当前对象
+     */
+    <T> T insert(T entity, String activatedColumns, boolean ignoreNull);
+
+    /**
      * 将一个对象集合插入到一个数据源。
      * <p>
      * 如果你的字段声明了 '@Id(auto=true)'，则填充插入后最新的 ID 值;若auto=false,则内部采用fastInsert处理
@@ -113,6 +125,18 @@ public interface Dao {
      * @return 已插入记录数
      */
     <T> int[] insert(List<T> entities);
+
+    /**
+     * 将一个对象集合插入到一个数据源，可忽略null值。
+     * <p>
+     * 如果你的字段声明了 '@Id(auto=true)'，则填充插入后最新的 ID 值;若auto=false,则内部采用fastInsert处理
+     *
+     * @param entities         实体对象集合
+     * @param activatedColumns 可插入字段正则表达式，如a|b表示只插入a和b字段，留空则插入所有字段
+     * @param ignoreNull       null值是否不更新
+     * @return 已插入记录数集合
+     */
+    <T> int[] insert(List<T> entities, String activatedColumns, boolean ignoreNull);
 
     /**
      * 快速插入一个对象
@@ -124,14 +148,46 @@ public interface Dao {
     <T> int[] fastInsert(List<T> entities);
 
     /**
+     * 快速插入一个对象，可忽略null值。
+     * <p>
+     * '@Id(auto=true)'将不起作用,内部统一采用 batch 的方法插入
+     *
+     * @param entities         实体对象集合
+     * @param activatedColumns 可插入字段正则表达式，如a|b表示只插入a和b字段，留空则插入所有字段
+     * @param ignoreNull       null值是否不更新
+     * @return 影响的行数
+     */
+    <T> int[] fastInsert(List<T> entities, String activatedColumns, boolean ignoreNull);
+
+    /**
      * 更新对象
      */
     int update(Object entity);
 
     /**
+     * 更新对象
+     *
+     * @param entity           实体对象
+     * @param activatedColumns 可更新字段正则表达式，如a|b表示只更新a和b字段，留空则更新所有字段
+     * @param ignoreNull       null值是否不更新
+     * @return 影响的行数
+     */
+    int update(Object entity, String activatedColumns, boolean ignoreNull);
+
+    /**
      * 批量更新对象
      */
     <T> int[] update(List<T> entities);
+
+    /**
+     * 批量更新对象
+     *
+     * @param entities         实体对象集合
+     * @param activatedColumns 可更新字段正则表达式，如a|b表示只更新a和b字段，留空则更新所有字段
+     * @param ignoreNull       null值是否不更新
+     * @return 影响的行数集合
+     */
+    <T> int[] update(List<T> entities, String activatedColumns, boolean ignoreNull);
 
     /**
      * 删除对象

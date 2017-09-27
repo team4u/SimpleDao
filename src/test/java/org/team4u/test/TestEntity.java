@@ -18,20 +18,34 @@ public class TestEntity {
     @Column
     private String name;
 
+    @Column
+    private String remark;
+
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public TestEntity setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public TestEntity setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public TestEntity setRemark(String remark) {
+        this.remark = remark;
+        return this;
     }
 
     @Override
@@ -39,6 +53,7 @@ public class TestEntity {
         return "TestEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 

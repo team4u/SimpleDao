@@ -125,12 +125,9 @@ public class SimpleDaoTest {
     public void insert() {
         TestEntity entity = insertEntity(dao);
 
-        TestEntity result = dao.queryForObject(TestEntity.class, SqlBuilders.select(TestEntity.class)
-                .where("id", "=", entity.getId())
-                .create());
+        TestEntity result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
         Assert.assertEquals(entity.getId(), result.getId());
         Assert.assertEquals(1, dao.delete(result));
-
 
         dao.insert(CollectionUtil.newArrayList(entity));
         Assert.assertEquals(1, dao.delete(entity));
@@ -151,6 +148,34 @@ public class SimpleDaoTest {
         Assert.assertNull(tokenEntity.getId());
         tokenEntity.setId(3L);
         Assert.assertEquals(1, dao.delete(tokenEntity));
+
+        entity.setName("1");
+
+        dao.insert(CollectionUtil.newArrayList(entity), "name", false);
+        result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(null, result.getRemark());
+        Assert.assertEquals(1, dao.delete(entity));
+
+        dao.fastInsert(CollectionUtil.newArrayList(entity), "name", false);
+        result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(null, result.getRemark());
+        Assert.assertEquals(1, dao.delete(entity));
+
+        entity.setRemark(null);
+
+        dao.insert(CollectionUtil.newArrayList(entity), null, true);
+        result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(null, result.getRemark());
+        Assert.assertEquals(1, dao.delete(entity));
+
+        dao.fastInsert(CollectionUtil.newArrayList(entity), null, true);
+        result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(null, result.getRemark());
+        Assert.assertEquals(1, dao.delete(entity));
     }
 
     @Test
@@ -159,14 +184,24 @@ public class SimpleDaoTest {
         entity.setName(RandomUtil.randomUUID());
         Assert.assertEquals(1, dao.update(entity));
         Assert.assertEquals(entity.getName(),
-                dao.queryForObject(TestEntity.class, SqlBuilders.select(TestEntity.class)
-                        .where("id", "=", entity.getId())
-                        .create())
-                        .getName()
-        );
+                dao.queryWithPkForObject(TestEntity.class, entity.getId()).getName());
 
         entity.setName(RandomUtil.randomUUID());
         Assert.assertEquals(1, dao.update(CollectionUtil.newArrayList(entity))[0]);
+
+        String remark = entity.getRemark();
+        entity.setName("1");
+        entity.setRemark(null);
+
+        dao.update(CollectionUtil.newArrayList(entity), "name", false);
+        TestEntity result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(remark, result.getRemark());
+
+        dao.update(CollectionUtil.newArrayList(entity), null, true);
+        result = dao.queryWithPkForObject(TestEntity.class, entity.getId());
+        Assert.assertEquals("1", result.getName());
+        Assert.assertEquals(remark, result.getRemark());
     }
 
     @Test
@@ -325,8 +360,8 @@ public class SimpleDaoTest {
     }
 
     private TestEntity insertEntity(Dao dao) {
-        TestEntity entity = new TestEntity();
-        entity.setName("x");
-        return dao.insert(entity);
+        return dao.insert(new TestEntity()
+                .setName("x")
+                .setRemark("y"));
     }
 }
