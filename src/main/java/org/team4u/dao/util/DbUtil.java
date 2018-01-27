@@ -1,7 +1,7 @@
 package org.team4u.dao.util;
 
-import com.xiaoleilu.hutool.util.StrUtil;
-import org.team4u.kit.core.util.MapUtil;
+import cn.hutool.core.util.StrUtil;
+import org.team4u.kit.core.util.MapExUtil;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -17,7 +17,7 @@ public class DbUtil {
     public static <T extends Map<String, Object>> T toMap(Class<T> mapClass,
                                                           ResultSet rs,
                                                           boolean camelCase) throws SQLException {
-        T map = (T) MapUtil.<String, Object>newInstance(mapClass);
+        T map = (T) MapExUtil.<String, Object>newInstance(mapClass);
         ResultSetMetaData rsmd = rs.getMetaData();
         int cols = rsmd.getColumnCount();
 

@@ -1,6 +1,6 @@
 package org.team4u.dao.resultset.handler;
 
-import com.xiaoleilu.hutool.convert.Convert;
+import cn.hutool.core.convert.Convert;
 import org.apache.commons.dbutils.ResultSetHandler;
 
 import java.sql.ResultSet;

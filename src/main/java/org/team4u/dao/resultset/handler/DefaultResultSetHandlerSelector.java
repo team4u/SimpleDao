@@ -1,6 +1,6 @@
 package org.team4u.dao.resultset.handler;
 
-import com.xiaoleilu.hutool.util.ClassUtil;
+import cn.hutool.core.util.ClassUtil;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;

@@ -1,7 +1,7 @@
 package org.team4u.dao.resultset.processor;
 
 
-import com.xiaoleilu.hutool.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import org.apache.commons.dbutils.BeanProcessor;
 
 import java.lang.reflect.Field;

@@ -1,7 +1,7 @@
 package org.team4u.dao.transaction;
 
-import com.xiaoleilu.hutool.log.Log;
-import com.xiaoleilu.hutool.log.LogFactory;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import org.apache.commons.dbutils.DbUtils;
 import org.team4u.kit.core.action.Callback;
 import org.team4u.kit.core.error.ComboException;

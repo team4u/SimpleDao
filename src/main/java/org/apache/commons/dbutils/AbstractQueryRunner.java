@@ -17,7 +17,7 @@
 package org.apache.commons.dbutils;
 
 
-import com.xiaoleilu.hutool.util.ReflectUtil;
+import cn.hutool.core.util.ReflectUtil;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Field;

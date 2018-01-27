@@ -1,8 +1,8 @@
 package org.team4u.test;
 
-import com.xiaoleilu.hutool.lang.Dict;
-import com.xiaoleilu.hutool.util.CollectionUtil;
-import com.xiaoleilu.hutool.util.RandomUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Dict;
+import cn.hutool.core.util.RandomUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

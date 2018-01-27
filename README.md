@@ -20,23 +20,23 @@ SimpleDao 是一个轻量级的数据库操作工具类，可以快速方便地�
 <dependency>
     <groupId>org.team4u.dao</groupId>
     <artifactId>simple-dao</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 
 <dependency>
     <groupId>org.team4u</groupId>
     <artifactId>team-kit-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.5</version>
 </dependency>
 <dependency>
-    <groupId>com.xiaoleilu</groupId>
+    <groupId>cn.hutool</groupId>
     <artifactId>hutool-core</artifactId>
-    <version>3.1.1</version>
+    <version>4.0.2</version>
 </dependency>
 <dependency>
-    <groupId>com.xiaoleilu</groupId>
+    <groupId>cn.hutool</groupId>
     <artifactId>hutool-log</artifactId>
-    <version>3.1.1</version>
+    <version>4.0.2</version>
 </dependency>
 ```
 

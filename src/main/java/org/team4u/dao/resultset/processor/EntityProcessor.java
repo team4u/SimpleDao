@@ -1,8 +1,8 @@
 package org.team4u.dao.resultset.processor;
 
 
+import cn.hutool.core.lang.Assert;
 import org.apache.commons.dbutils.BeanProcessor;
-import org.team4u.kit.core.util.AssertUtil;
 import org.team4u.sql.builder.entity.Entity;
 import org.team4u.sql.builder.entity.EntityManager;
 import org.team4u.sql.builder.entity.builder.EntitySqlBuilder;
@@ -58,7 +58,7 @@ public class EntityProcessor extends BeanProcessor {
         Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         Entity entity = entityManager.createIfNotExist(typeThreadLocal.get());
-        AssertUtil.notNull(entity, String.format("Can't find entity(table=%s)", entity.getTable()));
+        Assert.notNull(entity, String.format("Can't find entity(table=%s)", entity.getTable()));
 
         for (int col = 1; col <= cols; col++) {
             String columnName = rsmd.getColumnLabel(col);

@@ -1,6 +1,7 @@
 package org.team4u.dao.core;
 
-import com.xiaoleilu.hutool.util.CollectionUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Assert;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.team4u.dao.resultset.handler.DefaultResultSetHandlerSelector;
@@ -13,7 +14,6 @@ import org.team4u.kit.core.error.ExceptionUtil;
 import org.team4u.kit.core.lang.EmptyValue;
 import org.team4u.kit.core.lang.Pager;
 import org.team4u.kit.core.lang.Pair;
-import org.team4u.kit.core.util.AssertUtil;
 import org.team4u.kit.core.util.CollectionExUtil;
 import org.team4u.kit.core.util.ValueUtil;
 import org.team4u.sql.builder.Sql;
@@ -48,7 +48,7 @@ public class SimpleDao implements Dao {
         this.connectionHandler = connectionHandler;
 
         dialect = DialectManager.INSTANCE.getDialect(this.dataSource);
-        AssertUtil.notNull(dialect, "Not support database:" + dataSource);
+        Assert.notNull(dialect, "Not support database:" + dataSource);
         queryRunner = new QueryRunner();
     }
 
