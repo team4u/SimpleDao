@@ -31,12 +31,12 @@ SimpleDao 是一个轻量级的数据库操作工具类，可以快速方便地�
 <dependency>
     <groupId>cn.hutool</groupId>
     <artifactId>hutool-core</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.5</version>
 </dependency>
 <dependency>
     <groupId>cn.hutool</groupId>
     <artifactId>hutool-log</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.5</version>
 </dependency>
 ```
 
